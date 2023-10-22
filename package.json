@@ -4,8 +4,8 @@
   "description": "Instagram clone",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js",
-    "server": "nodemon server/index.js"
+    "start": "node --require dotenv/config server/index.js",
+    "server": "nodemon --require dotenv/config server/index.js"
   },
   "author": "Avag Sargsyan",
   "license": "MIT",
@@ -16,5 +16,6 @@
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
-  }
+  },
+  "type": "module"
 }
