@@ -1,28 +1,16 @@
 import express from 'express';
+import {
+  addPost,
+  deletePost,
+  getPosts,
+  updatePost
+} from '../controllers/post.controller.js';
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.status(200).json({
-    message: 'Get posts'
-  });
-});
+router.get('/', getPosts);
+router.post('/', addPost);
 
-router.post('/', (req, res) => {
-  res.status(200).json({
-    message: 'Set post'
-  });
-});
-
-router.put('/:id', (req, res) => {
-  res.status(200).json({
-    message: `Update post ${req.params.id}`
-  });
-});
-
-router.delete('/:id', (req, res) => {
-  res.status(200).json({
-    message: `Delete post ${req.params.id}`
-  });
-});
+router.put('/:id', updatePost);
+router.delete('/:id', deletePost);
 
 export default router;
