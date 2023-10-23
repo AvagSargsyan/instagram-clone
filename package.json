@@ -1,0 +1,24 @@
+{
+  "name": "instagram-clone",
+  "version": "1.0.0",
+  "description": "Instagram clone",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --require dotenv/config server/index.js",
+    "server": "nodemon --require dotenv/config server/index.js"
+  },
+  "author": "Avag Sargsyan",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.6.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "type": "module"
+}
