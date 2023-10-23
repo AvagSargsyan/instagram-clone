@@ -65,9 +65,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
 // req: GET /api/users/me
 const getMe = asyncHandler(async (req, res) => {
-  res.json({
-    message: 'User data'
-  });
+  res.status(200).json(req.user);
 });
 
 // Generate JWT
