@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node --require dotenv/config server/index.js",
-    "server": "nodemon --require dotenv/config server/index.js"
+    "server": "nodemon --require dotenv/config server/index.js",
+    "client": "npm start --prefix client"
   },
   "author": "Avag Sargsyan",
   "license": "MIT",
