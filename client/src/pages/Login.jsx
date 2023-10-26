@@ -1,11 +1,31 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { login, reset } from '../features/auth/auth.slice';
 
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      // todo: Handle error
+    }
+
+    if (isSuccess || user) {
+      navigate('/');
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const { email, password } = formData;
 
@@ -19,7 +39,12 @@ function Login() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    // todo: Add the login logic
+    const userData = {
+      email,
+      password
+    };
+
+    dispatch(login(userData));
   };
 
   return (
@@ -52,7 +77,8 @@ function Login() {
           <button
             type="submit"
             className="btn btn-block">
-            Log in
+            {/* todo: Add a loading spinner */}
+            {isLoading ? 'Loading...' : 'Log in'}
           </button>
         </div>
       </form>

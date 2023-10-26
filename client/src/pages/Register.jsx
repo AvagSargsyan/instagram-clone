@@ -1,5 +1,7 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { register, reset } from '../features/auth/auth.slice';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -8,6 +10,24 @@ function Register() {
     email: '',
     password: ''
   });
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      // todo: Handle error
+    }
+
+    if (isSuccess || user) {
+      navigate('/');
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const { name, fullName, email, password } = formData;
 
@@ -20,6 +40,10 @@ function Register() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    const userData = { name, email, password };
+
+    dispatch(register(userData));
   };
 
   return (
@@ -74,7 +98,10 @@ function Register() {
             />
           </div>
           <div>
-            <button type="submit">Sign up</button>
+            <button type="submit">
+              {/* todo: Add a loading spinner */}
+              {isLoading ? 'Loading...' : 'Sign up'}
+            </button>
           </div>
         </form>
         <div>

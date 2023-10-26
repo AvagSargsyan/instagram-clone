@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 
-function Header() {
+function GuestHeader() {
   return (
     <header>
       <div className="logo">
-        <Link to="/login">Instagram</Link>
+        <Link to="/login">Instagram Clone</Link>
       </div>
       <ul>
         <li>
@@ -18,4 +18,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default GuestHeader;
