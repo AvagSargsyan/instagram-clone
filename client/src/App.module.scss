@@ -1,0 +1,7 @@
+.app {
+  --app-background: var(--primary-background);
+
+  background: var(--app-background);
+  display: flex;
+  justify-content: center;
+}
