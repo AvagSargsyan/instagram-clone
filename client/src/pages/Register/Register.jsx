@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { register, reset } from '../../features/auth/auth.slice';
 import styles from './Register.module.scss';
+import InstagramLogo from '../../components/InstagramLogo/InstagramLogo';
+import FormControl from '../../components/FormControl/FormControl';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -50,14 +52,7 @@ function Register() {
   return (
     <section className={styles.container}>
       <div className={styles.formContainer}>
-        <h1 className={`${styles.logo} instagram-logo`}>
-          <img
-            className="instagram-logo-img"
-            src="/logos/instagram_logo.png"
-            alt="Instagram"
-          />
-          <span>clone</span>
-        </h1>
+        <InstagramLogo className={styles.logo} />
         <form
           onSubmit={onSubmit}
           className={styles.form}>
@@ -66,7 +61,7 @@ function Register() {
           </p>
           <a
             href="#"
-            className={`${styles.facebookBtn} log-in-with-facebook-btn`}>
+            className={`btn-default ${styles.facebookBtn}`}>
             <img
               src="/logos/facebook_logo.png"
               alt="Facebook"
@@ -77,69 +72,37 @@ function Register() {
             <div className={styles.line}></div>
             <div className={styles.orText}>or</div>
           </div>
-          <div className={styles.formControl}>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={email}
-              onChange={onChange}
-              className={styles.input}
-            />
-            <span
-              htmlFor="email"
-              className={email ? styles.label : styles.placeholder}>
-              Mobile number or email address
-            </span>
-          </div>
-          <div className={styles.formControl}>
-            <input
-              type="text"
-              id="fullName"
-              name="fullName"
-              value={fullName}
-              onChange={onChange}
-              className={styles.input}
-            />
-            <span
-              htmlFor="email"
-              className={fullName ? styles.label : styles.placeholder}>
-              Full Name
-            </span>
-          </div>
-          <div className={styles.formControl}>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={name}
-              onChange={onChange}
-              className={styles.input}
-            />
-            <span
-              htmlFor="email"
-              className={name ? styles.label : styles.placeholder}>
-              Username
-            </span>
-          </div>
-          <div className={styles.formControl}>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={onChange}
-              className={styles.input}
-            />
-            <span
-              htmlFor="email"
-              className={password ? styles.label : styles.placeholder}>
-              Password
-            </span>
-          </div>
+          <FormControl
+            type="email"
+            name="email"
+            value={email}
+            onChange={onChange}>
+            Mobile number or email address
+          </FormControl>
+          <FormControl
+            type="text"
+            name="fullName"
+            value={fullName}
+            onChange={onChange}>
+            Full Name
+          </FormControl>
+          <FormControl
+            type="text"
+            name="name"
+            value={name}
+            onChange={onChange}>
+            Username
+          </FormControl>
+          <FormControl
+            type="password"
+            name="password"
+            value={password}
+            onChange={onChange}>
+            Password
+          </FormControl>
           <button
             type="submit"
-            className={`${styles.signupBtn} btn-default`}>
+            className={`btn-default ${styles.signupBtn}`}>
             {/* todo: Add a loading spinner */}
             {isLoading ? 'Loading...' : 'Sign up'}
           </button>

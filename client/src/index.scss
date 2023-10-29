@@ -1,3 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-family);
+}
+
 // Variables
 :root {
   --font-family: 'Roboto', Helvetica, Arial, sans-serif;
@@ -5,7 +15,7 @@
   --primary-background: #ffffff;
   --primary-button: #0095f6;
   --primary-button-hover: #1877f2;
-  --primary-button-disabled: #418bed;
+  --primary-button-disabled: #63a5fa;
   --primary-icon: #262626;
   --primary-text: #000000;
 
@@ -27,63 +37,36 @@
   --success: #58c322;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-family: var(--font-family);
-}
-
-// Reusable styles
-.instagram-logo {
-  font-family: 'Pacifico', 'Times New Roman', Times, serif;
-  color: var(--primary-icon);
-  font-size: 30px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-
-  .instagram-logo-img {
-    width: 175px;
-    height: 51px;
-  }
-}
-
+// Mixins
 @mixin btn {
-  --button-color: var(--primary-button);
-  --button-color-disabled: var(--primary-button-disabled);
-  --button-color-hover: var(--primary-button-hover);
-  --text-color: var(--primary-background);
-
-  background: var(--button-color);
-  color: var(--primary-background);
   text-decoration: none;
   text-align: center;
   font-size: 14px;
   font-weight: 700;
   border-radius: 6px;
-  padding: 7px 16px;
+  padding: 8px 16px;
   border: none;
+}
+
+// Reusable styles
+.btn-default {
+  --button-color: var(--primary-button);
+  --button-color-disabled: var(--primary-button-disabled);
+  --button-color-hover: var(--primary-button-hover);
+  --text-color: var(--primary-background);
+
+  @include btn;
+
+  background: var(--button-color);
+  color: var(--primary-background);
   cursor: pointer;
 
   &:hover {
     background: var(--button-color-hover);
   }
-}
 
-.log-in-with-facebook-btn {
-  @include btn;
-
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.btn-default {
-  @include btn;
-
-  padding: 8px 16px;
+  &:disabled {
+    background: var(--button-color-disabled);
+    cursor: default;
+  }
 }
