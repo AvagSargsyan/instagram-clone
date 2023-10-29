@@ -2,6 +2,8 @@
   --app-background: var(--primary-background);
 
   background: var(--app-background);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
