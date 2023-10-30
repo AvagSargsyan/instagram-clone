@@ -1,15 +1,21 @@
-import GuestHeader from "../GuestHeader";
-import { Link } from "react-router-dom";
+import GuestHeader from '../GuestHeader/GuestHeader';
+import { Link } from 'react-router-dom';
+import styles from './NotFound.module.scss';
 
 function NotFound() {
   return (
-    <div>
-      <GuestHeader />
-      <section>
-        <h2>Sorry, this page isn't available.</h2>
-        <p>
+    <div className={styles.container}>
+      <GuestHeader className={styles.header} />
+      <section className={styles.main}>
+        <h2 className={styles.heading}>Sorry, this page isn't available.</h2>
+        <p className={styles.info}>
           The link you followed may be broken, or the page may have been
-          removed. <Link to="/login">Go back to Instagram.</Link>
+          removed.{' '}
+          <Link
+            to="/login"
+            className={styles.link}>
+            Go back to Instagram.
+          </Link>
         </p>
       </section>
     </div>

@@ -1,0 +1,43 @@
+@import '../../index.scss';
+
+.container {
+  --background-color: var(--primary-background);
+  --text-color: var(--primary-text);
+  --border-color: var(--separator);
+  --link-color: var(--link);
+  --button-color: var(--primary-button);
+
+  background: var(--background-color);
+  color: var(--text-color);
+  width: 100%;
+  padding: 8px 22vw;
+  border-bottom: 1px solid var(--separator);
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1px;
+
+    ul {
+      list-style: none;
+      display: flex;
+      gap: 16px;
+
+      .signupBtn {
+        @include btn;
+
+        padding: 0;
+        color: var(--button-color);
+
+        &:hover {
+          color: var(--link-color);
+        }
+      }
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
