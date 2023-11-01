@@ -1,28 +1,48 @@
-import { useSelector } from 'react-redux';
-import GuestHeader from '../components/GuestHeader';
-import UserHeader from '../components/UserHeader'
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import UserHeader from '../components/UserHeader';
+import { getAllPosts, reset } from '../features/post/post.slice';
 
 function Home() {
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { posts, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.post
+  );
+
+  useEffect(() => {
+    if (user === null) {
+      navigate('/login');
+    }
+
+    dispatch(getAllPosts());
+
+    return () => {
+      dispatch(reset());
+    }
+  }, [ user, dispatch, navigate ]);
+
+  if (isLoading) {
+    return 'Loading...';
+  }
 
   return (
-    <div>
-      {user ? (
-        // todo: Replace with current user's actual home page
-        <>
-          <UserHeader />
-          <section>{user.name}'s Home page</section>
-        </>
-      ) : (
-        <>
-          <GuestHeader />
-          <section>
-            <h2>Sorry, this page isn't available.</h2>
-            <p>Please log in to view the contents of this page.</p>
-          </section>
-        </>
-      )}
-    </div>
+    <section>
+      <UserHeader />
+      <section>
+        {posts.length > 0 ? (
+          <div>
+            {posts.map((post) => (
+              <p key={post._id}>{post.content}</p>
+            ))}
+          </div>
+        ) : (
+          <h3>There aren't any posts to show.</h3>
+        )}
+      </section>
+    </section>
   );
 }
 

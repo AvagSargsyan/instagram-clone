@@ -19,16 +19,16 @@ function Login() {
   );
 
   useEffect(() => {
-    if (isError) {
-      // todo: Handle error
-    }
-
-    if (isSuccess || user) {
+    if (user !== null) {
       navigate('/');
     }
 
+    if (isError) {
+      console.log(message);
+    }
+
     dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [user, isError, message, navigate, dispatch]);
 
   const { email, password } = formData;
 

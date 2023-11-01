@@ -20,7 +20,7 @@ function UserHeader() {
       </div>
       <ul>
         <li>
-          <Link to="/">{user.name}</Link>
+          <Link to="/">{user && user.name}</Link>
         </li>
       </ul>
       <button onClick={onLogout}>Log out</button>
