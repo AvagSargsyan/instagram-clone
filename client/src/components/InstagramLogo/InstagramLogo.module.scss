@@ -1,0 +1,9 @@
+.instagramLogo {
+  --color: var(--primary-icon);
+
+  font-family: 'Pacifico', 'Times New Roman', Times, serif;
+  color: var(--color);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}

@@ -3,7 +3,13 @@ import Post from '../models/post.model.js';
 
 // req: GET /api/posts/all
 const getAllPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find().sort('-createdAt');
+  const posts = await Post
+    .find()
+    .sort('-createdAt')
+    .populate({
+      path: 'author',
+      select: 'name'
+    });
 
   res.status(200).json(posts);
 });
@@ -89,4 +95,3 @@ const deletePost = asyncHandler(async (req, res) => {
 });
 
 export { getAllPosts, getOwnPosts, addPost, updatePost, deletePost };
-

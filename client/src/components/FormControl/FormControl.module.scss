@@ -1,0 +1,40 @@
+.formControl {
+  --text-color-dark: var(--primary-text);
+  --text-color-light: var(--secondary-text);
+  --border-color: var(--separator);
+
+  position: relative;
+  width: 100%;
+
+  .input {
+    border: 1px solid var(--border-color);
+    color: var(--text-color-dark);
+    width: 100%;
+    height: 38px;
+    padding: 8px;
+    border-radius: 3px;
+
+    &:focus {
+      outline: none;
+      border-color: var(--text-color-light);
+    }
+  }
+
+  .placeholder {
+    color: var(--text-color-light);
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 8px;
+  }
+
+  .label {
+    color: var(--text-color-light);
+    font-size: 10px;
+    position: absolute;
+    left: 8px;
+    top: 3px;
+    transition: 0.2s ease all;
+  }
+}

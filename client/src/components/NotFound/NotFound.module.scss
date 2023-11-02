@@ -1,0 +1,26 @@
+.container {
+  --background-color: var(--primary-background);
+  --text-color: var(--primary-text);
+  --link-color: var(--link);
+
+  background: var(--background-color);
+  color: var(--text-color);
+  height: 100vh;
+  width: 100%;
+
+  .main {
+    text-align: center;
+    padding: 0 10vw;
+
+    .heading {
+      font-size: 24px;
+      margin: 35px 0;
+    }
+
+    .link {
+      color: var(--link-color);
+      margin-top: 8px;
+      text-decoration: none;
+    }
+  }
+}
