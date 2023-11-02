@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UserHeader from '../components/UserHeader';
+import UserHeader from '../components/UserHeader/UserHeader';
 import { getAllPosts, reset } from '../features/post/post.slice';
 
 function Home() {
@@ -21,21 +21,30 @@ function Home() {
 
     return () => {
       dispatch(reset());
-    }
-  }, [ user, dispatch, navigate ]);
+    };
+  }, [user, dispatch, navigate]);
 
   if (isLoading) {
     return 'Loading...';
   }
 
   return (
-    <section>
+    <section
+      style={{
+        // todo: Remove this temporary styles when styling this component
+        minHeight: '100vh',
+        minWidth: '100%',
+        justifySelf: 'flex-start'
+      }}>
       <UserHeader />
       <section>
         {posts.length > 0 ? (
           <div>
             {posts.map((post) => (
-              <p key={post._id}>{post.content}</p>
+              <div key={post._id}>
+                <h6>{post.author.name}</h6>
+                <section>{post.content}</section>
+              </div>
             ))}
           </div>
         ) : (
