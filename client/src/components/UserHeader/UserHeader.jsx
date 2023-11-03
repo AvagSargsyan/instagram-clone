@@ -17,17 +17,6 @@ function UserHeader() {
 
   return (
     <header className={styles.container}>
-      {/* <div className="logo">
-        <Link to="/">
-          <InstagramLogo />
-        </Link>
-      </div>
-      <ul>
-        <li>
-          <Link to="/">{user && user.name}</Link>
-        </li>
-      </ul>
-      <button onClick={onLogout}>Log out</button> */}
       <nav>
         <Link
           to="/"
@@ -40,7 +29,7 @@ function UserHeader() {
         <ul>
           <li>
             <Link
-              to="/"
+              to="/profile"
               className={styles.userName}>
               {user && user.name}
             </Link>

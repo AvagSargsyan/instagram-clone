@@ -16,7 +16,9 @@ const getAllPosts = asyncHandler(async (req, res) => {
 
 // req: GET /api/posts
 const getOwnPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find({ author: req.user.id });
+  const posts = await Post
+    .find({ author: req.user.id })
+    .sort('-createdAt');
 
   res.status(200).json(posts);
 });

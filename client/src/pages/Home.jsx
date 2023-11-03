@@ -25,17 +25,12 @@ function Home() {
   }, [user, dispatch, navigate]);
 
   if (isLoading) {
+    // todo: Add a loading spinner
     return 'Loading...';
   }
 
   return (
-    <section
-      style={{
-        // todo: Remove this temporary styles when styling this component
-        minHeight: '100vh',
-        minWidth: '100%',
-        justifySelf: 'flex-start'
-      }}>
+    <section>
       <UserHeader />
       <section>
         {posts.length > 0 ? (
