@@ -24,35 +24,35 @@ function Profile() {
     };
   }, [user, dispatch, navigate]);
 
-  if (isLoading) {
-    // todo: Add a loading spinner
-    return 'Loading...';
-  }
-
   return (
     <section>
       <UserHeader />
-      <div>
-        <section>
-          <h1>{user.name}</h1>
-          <div>{posts && posts.length} posts</div>
-          <div>{user.fullName}</div>
-        </section>
-        <section>
-          <h3>My posts</h3>
-          {posts.length > 0 ? (
-            <div>
-              {posts.map((post) => (
-                <div key={post._id}>
-                  <section>{post.content}</section>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <h3>You haven't posted anything yet.</h3>
-          )}
-        </section>
-      </div>
+      {isLoading ? (
+        // todo: Add a loading spinner
+        'Loading...'
+      ) : (
+        <div>
+          <section>
+            <h1>{user.name}</h1>
+            <div>{posts && posts.length} posts</div>
+            <div>{user.fullName}</div>
+          </section>
+          <section>
+            <h3>My posts</h3>
+            {posts.length > 0 ? (
+              <div>
+                {posts.map((post) => (
+                  <div key={post._id}>
+                    <section>{post.content}</section>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <h3>You haven't posted anything yet.</h3>
+            )}
+          </section>
+        </div>
+      )}
     </section>
   );
 }

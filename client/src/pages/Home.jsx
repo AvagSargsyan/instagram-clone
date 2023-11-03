@@ -24,28 +24,28 @@ function Home() {
     };
   }, [user, dispatch, navigate]);
 
-  if (isLoading) {
-    // todo: Add a loading spinner
-    return 'Loading...';
-  }
-
   return (
     <section>
       <UserHeader />
-      <section>
-        {posts.length > 0 ? (
-          <div>
-            {posts.map((post) => (
-              <div key={post._id}>
-                <h6>{post.author.name}</h6>
-                <section>{post.content}</section>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <h3>There aren't any posts to show.</h3>
-        )}
-      </section>
+      {isLoading ? (
+        // todo: Add a loading spinner
+        'Loading...'
+      ) : (
+        <section>
+          {posts.length > 0 ? (
+            <div>
+              {posts.map((post) => (
+                <div key={post._id}>
+                  <h6>{post.author.name}</h6>
+                  <section>{post.content}</section>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <h3>There aren't any posts to show.</h3>
+          )}
+        </section>
+      )}
     </section>
   );
 }

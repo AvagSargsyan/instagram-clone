@@ -49,6 +49,26 @@ export const getOwnPosts = createAsyncThunk(
   }
 );
 
+// Create post
+export const createPost = createAsyncThunk(
+  'post/createPost',
+  async (postData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+
+      return await postService.createPost(postData, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const postSlice = createSlice({
   name: 'post',
   initialState,
@@ -84,6 +104,23 @@ export const postSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
+      
+      .addCase(createPost.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createPost.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+
+        state.posts.push(action.payload);
+      })
+      .addCase(createPost.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+
+        state.message = action.payload;
+      })
+
 
   }
 });
