@@ -32,7 +32,7 @@ function Register() {
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  const { name, fullName, email, password } = formData;
+  const { name, email, fullName, password } = formData;
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -44,7 +44,7 @@ function Register() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const userData = { name, email, password };
+    const userData = { name, email, fullName, password };
 
     dispatch(register(userData));
   };
