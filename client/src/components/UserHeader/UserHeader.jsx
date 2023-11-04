@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../../features/auth/auth.slice';
 import InstagramLogo from '../InstagramLogo/InstagramLogo';
 import styles from './UserHeader.module.scss';
-import { FiPlus } from 'react-icons/fi';
 import { useState } from 'react';
 import Overlay from '../Overlay/Overlay';
 import CreatePost from '../CreatePost/CreatePost';
@@ -43,7 +42,7 @@ function UserHeader() {
         <ul>
           <li>
             <button onClick={openCreatePostWindow}>
-              <FiPlus />
+              +
             </button>
           </li>
           <li>

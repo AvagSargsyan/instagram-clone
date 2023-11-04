@@ -69,6 +69,26 @@ export const createPost = createAsyncThunk(
   }
 );
 
+// Delete post
+export const deletePost = createAsyncThunk(
+  'post/deletePost',
+  async (postId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+
+      return await postService.deletePost(postId, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const postSlice = createSlice({
   name: 'post',
   initialState,
@@ -90,7 +110,7 @@ export const postSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
-      
+
       .addCase(getOwnPosts.pending, (state) => {
         state.isLoading = true;
       })
@@ -104,24 +124,34 @@ export const postSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
-      
+
       .addCase(createPost.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(createPost.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-
         state.posts.push(action.payload);
       })
       .addCase(createPost.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-
         state.message = action.payload;
       })
 
-
+      .addCase(deletePost.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.posts = state.posts.filter((post) => post._id !== action.payload.id);
+      })
+      .addCase(deletePost.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      });
   }
 });
 

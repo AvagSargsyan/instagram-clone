@@ -41,6 +41,8 @@ function Home() {
                 </div>
               ))}
             </div>
+          ) : isError ? (
+            <h3>An error accured while getting posts.</h3>
           ) : (
             <h3>There aren't any posts to show.</h3>
           )}

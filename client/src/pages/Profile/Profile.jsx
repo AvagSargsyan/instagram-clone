@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserHeader from '../../components/UserHeader/UserHeader';
-import { getOwnPosts, reset } from '../../features/post/post.slice';
+import { getOwnPosts, reset, deletePost } from '../../features/post/post.slice';
 
 function Profile() {
   const { user } = useSelector((state) => state.auth);
@@ -43,10 +43,15 @@ function Profile() {
               <div>
                 {posts.map((post) => (
                   <div key={post._id}>
-                    <section>{post.content}</section>
+                    <div>{post.content}</div>
+                    <button onClick={() => dispatch(deletePost(post._id))}>
+                      x
+                    </button>
                   </div>
                 ))}
               </div>
+            ) : isError ? (
+              <h3>An error accured while getting posts.</h3>
             ) : (
               <h3>You haven't posted anything yet.</h3>
             )}
