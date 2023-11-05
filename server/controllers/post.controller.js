@@ -3,22 +3,17 @@ import Post from '../models/post.model.js';
 
 // req: GET /api/posts/all
 const getAllPosts = asyncHandler(async (req, res) => {
-  const posts = await Post
-    .find()
-    .sort('-createdAt')
-    .populate({
-      path: 'author',
-      select: 'name'
-    });
+  const posts = await Post.find().sort('-createdAt').populate({
+    path: 'author',
+    select: 'name'
+  });
 
   res.status(200).json(posts);
 });
 
 // req: GET /api/posts
 const getOwnPosts = asyncHandler(async (req, res) => {
-  const posts = await Post
-    .find({ author: req.user.id })
-    .sort('-createdAt');
+  const posts = await Post.find({ author: req.user.id }).sort('-createdAt');
 
   res.status(200).json(posts);
 });
@@ -30,9 +25,15 @@ const addPost = asyncHandler(async (req, res) => {
     throw new Error('Please add a content field');
   }
 
+  console.log(req.body);
+  console.log(req.uploadedFileName);
+  console.log(req.file);
+  
+
   const post = await Post.create({
     content: req.body.content,
-    author: req.user.id
+    author: req.user.id,
+    imageSrc: req.uploadedFileName
   });
 
   res.status(201).json(post);
