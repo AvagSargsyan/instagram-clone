@@ -8,6 +8,7 @@ import {
 } from '../controllers/post.controller.js';
 import { protect } from '../middleware/auth.middleware.js';
 import { uploadSingle } from '../middleware/upload.middleware.js';
+import constants from '../constants.js';
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.get('/ownPosts', protect, getOwnPosts);
 router.post(
   '/',
   protect,
-  uploadSingle('server/uploads/images', 'image'),
+  uploadSingle(constants.IMAGE_PATH, 'image'),
   addPost
 );
 

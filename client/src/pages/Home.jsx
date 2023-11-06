@@ -37,7 +37,11 @@ function Home() {
               {posts.map((post) => (
                 <div key={post._id}>
                   <h6>{post.author.name}</h6>
-                  <section>{post.content}</section>
+                  <p>{post.content}</p>
+                  <img
+                    src={post.imageSrc}
+                    alt={`Post ${post._id}`}
+                  />
                 </div>
               ))}
             </div>

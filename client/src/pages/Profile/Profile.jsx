@@ -43,7 +43,11 @@ function Profile() {
               <div>
                 {posts.map((post) => (
                   <div key={post._id}>
-                    <div>{post.content}</div>
+                    <p>{post.content}</p>
+                    <img
+                      src={post.imageSrc}
+                      alt={`Post ${post._id}`}
+                    />
                     <button onClick={() => dispatch(deletePost(post._id))}>
                       x
                     </button>

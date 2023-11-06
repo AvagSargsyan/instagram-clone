@@ -1,5 +1,4 @@
 import multer from 'multer';
-import path from 'path';
 
 /**
  * Creates a disk storage configuration for multer.

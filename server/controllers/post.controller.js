@@ -25,15 +25,10 @@ const addPost = asyncHandler(async (req, res) => {
     throw new Error('Please add a content field');
   }
 
-  console.log(req.body);
-  console.log(req.uploadedFileName);
-  console.log(req.file);
-  
-
   const post = await Post.create({
     content: req.body.content,
     author: req.user.id,
-    imageSrc: req.uploadedFileName
+    imageSrc: `/uploads/images/${req.uploadedFileName}`
   });
 
   res.status(201).json(post);
