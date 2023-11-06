@@ -29,14 +29,15 @@ const getOwnPosts = async (token) => {
 };
 
 // Create post
-const createPost = async (postData, token) => {
+const createPost = async (formData, token) => {
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'
     }
   };
 
-  const response = await axios.post(API_URL, postData, config);
+  const response = await axios.post(API_URL, formData, config);
 
   return response.data;
 };

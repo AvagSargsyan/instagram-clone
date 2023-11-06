@@ -7,23 +7,30 @@ function CreatePost() {
   const { posts, isLoading, isSuccess, isError } = useSelector(
     (state) => state.post
   );
-  const [postText, setPostText] = useState('');
+  const [content, setContent] = useState('');
+  const [image, setImage] = useState(null);
   const [isPostCreated, setIsPostCreated] = useState(false);
 
-  const onInputChange = (e) => {
-    setPostText(e.target.value);
+  const onContentChange = (e) => {
+    setContent(e.target.value);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const postData = {
-      content: postText
-    };
 
-    dispatch(createPost(postData));
+    const formData = new FormData();
+    formData.append('content', content);
+    formData.append('image', image);
 
-    setPostText('');
+    dispatch(createPost(formData));
+    setContent('');
+    setImage(null);
     setIsPostCreated(true);
+  };
+
+  const onImageChange = (e) => {
+    const selectedImage = e.target.files[0];
+    setImage(selectedImage);
   };
 
   if (isPostCreated && isSuccess) {
@@ -43,13 +50,25 @@ function CreatePost() {
     <div>
       <h2>Create new post</h2>
       <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          placeholder="What's on your mind?"
-          value={postText}
-          onChange={onInputChange}
-        />
-        <button type="submit">Post</button>
+        <div>
+          <input
+            type="text"
+            placeholder="What's on your mind?"
+            value={content}
+            onChange={onContentChange}
+          />
+        </div>
+        <div>
+          <label>Upload Image:</label>
+          <input
+            type="file"
+            accept=".jpg, .jpeg, .png"
+            onChange={onImageChange}
+          />
+        </div>
+        <div>
+          <button type="submit">Post</button>
+        </div>
       </form>
     </div>
   );
