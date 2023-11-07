@@ -1,5 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import Post from '../models/post.model.js';
+import path from 'path';
+import fs from 'fs';
 
 // req: GET /api/posts/all
 const getAllPosts = asyncHandler(async (req, res) => {
@@ -87,6 +89,17 @@ const deletePost = asyncHandler(async (req, res) => {
     throw new Error('User not authorized');
   }
 
+  // Delete the associated image file
+  const imagePath = path.join('server/', post.imageSrc);
+  try {
+    await fs.promises.unlink(imagePath);
+  } catch (err) {
+    console.error(`Error deleting image: ${err}`);
+    res.status(500);
+    throw new Error('Image deletion failed');
+  }
+
+  // Delete the post from the database
   await post.deleteOne();
 
   res.status(200).json({ id: req.params.id });
