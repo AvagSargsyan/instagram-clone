@@ -12,6 +12,8 @@
   width: 100%;
   padding: 8px 22vw;
   border-bottom: 1px solid var(--separator);
+  position: sticky;
+  top: 0;
 
   nav {
     display: flex;

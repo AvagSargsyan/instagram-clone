@@ -67,7 +67,7 @@ function CreatePost() {
           />
         </div>
         <div>
-          <button type="submit">Post</button>
+          <button type="submit" disabled={!(image && content)}>Post</button>
         </div>
       </form>
     </div>
