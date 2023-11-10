@@ -27,16 +27,20 @@ function Profile() {
   return (
     <section>
       <UserHeader />
+      <div>
+        <img
+          src={user.profilePictureSrc}
+          alt={`User ${user.fullName}`}
+        />
+        <h1>{user.name}</h1>
+        <div>{posts && posts.length} posts</div>
+        <div>{user.fullName}</div>
+      </div>
       {isLoading ? (
         // todo: Add a loading spinner
         'Loading...'
       ) : (
         <div>
-          <section>
-            <h1>{user.name}</h1>
-            <div>{posts && posts.length} posts</div>
-            <div>{user.fullName}</div>
-          </section>
           <section>
             <h3>My posts</h3>
             {posts.length > 0 ? (

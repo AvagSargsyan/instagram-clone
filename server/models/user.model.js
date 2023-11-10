@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema(
       required: [true, 'Please add a name']
     },
     fullName: {
-      type: String,
+      type: String
     },
     email: {
       type: String,
@@ -17,6 +17,10 @@ const userSchema = mongoose.Schema(
     password: {
       type: String,
       required: [true, 'Please add a password']
+    },
+    profilePictureSrc: {
+      type: String,
+      default: '/uploads/images/default_profile_picture.png'
     }
   },
   { timestamps: true }

@@ -14,7 +14,14 @@ function Overlay({ isOpen, onClose, children }) {
     <div
       className={styles.overlay}
       onClick={handleOverlayClick}>
-      <div className={styles.modal}>{children}</div>
+      <div className={styles.modal}>
+        <button
+          className={styles.closeBtn}
+          onClick={onClose}>
+          x
+        </button>
+        {children}
+      </div>
     </div>
   );
 }

@@ -36,6 +36,10 @@ function Home() {
             <div>
               {posts.map((post) => (
                 <div key={post._id}>
+                  <img
+                    src={user.profilePictureSrc}
+                    alt={`User ${user.fullName}`}
+                  />
                   <h6>{post.author.name}</h6>
                   <p>{post.content}</p>
                   <img
