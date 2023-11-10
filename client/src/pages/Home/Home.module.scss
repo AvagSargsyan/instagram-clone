@@ -1,0 +1,18 @@
+.pageWrapper {
+  --background-color: var(--primary-background);
+  --text-color-dark: var(--primary-text);
+  --text-color-light: var(--secondary-text);
+  --border-color: var(--separator);
+
+  background: var(--background-color);
+  color: var(--text-color-dark);
+  width: 100%;
+  
+  .main {
+    padding: 8px 22vw;
+
+    .message {
+      margin-top: 10px;
+    }
+  }
+}

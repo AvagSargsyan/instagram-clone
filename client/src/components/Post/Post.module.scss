@@ -1,0 +1,55 @@
+.post {
+  --background-color: var(--primary-background);
+  --text-color-dark: var(--primary-text);
+  --text-color-light: var(--secondary-text);
+  --border-color: var(--separator);
+
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+
+  .user {
+    color: var(--text-color-dark);
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    gap: 10px;
+
+    .userProfilePicture {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      flex: 0;
+    }
+
+    .username {
+      font-weight: 700;
+      flex: 1;
+    }
+
+    .options {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  }
+
+  .postImageContainer {
+    .image {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .postContent {
+    padding: 5px 10px;
+    font-size: 15px;
+
+    .inlineUsername {
+      font-weight: 700;
+    }
+  }
+}
