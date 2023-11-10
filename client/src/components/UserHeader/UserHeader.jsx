@@ -13,6 +13,7 @@ function UserHeader() {
   const { user } = useSelector((state) => state.auth);
 
   const [isCreatePostWindowOpen, setIsCreatePostWindowOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const openCreatePostWindow = () => {
     setIsCreatePostWindowOpen(true);
@@ -20,6 +21,10 @@ function UserHeader() {
 
   const closeCreatePostWindow = () => {
     setIsCreatePostWindowOpen(false);
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prevState) => !prevState);
   };
 
   const onLogout = () => {
@@ -39,26 +44,58 @@ function UserHeader() {
             size="small"
           />
         </Link>
-        <ul>
-          <li>
-            <button onClick={openCreatePostWindow}>
-              +
-            </button>
-          </li>
-          <li>
-            <Link
-              to="/profile"
-              className={styles.userName}>
-              {user && user.name}
-            </Link>
-          </li>
-          <li>
+        <ul className={styles.navList}>
+          <li className={styles.navItem}>
             <button
-              className={`${styles.logoutBtn} btn-default`}
-              onClick={onLogout}>
-              Log out
+              onClick={openCreatePostWindow}
+              className={styles.addPostBtn}>
+              <img
+                src="/logos/add_icon.png"
+                alt="Create post"
+                className={styles.addPostIcon}
+              />
             </button>
           </li>
+          <li className={styles.navItem}>
+            <button
+              onClick={toggleDropdown}
+              className={`${styles.dropdownBtn} ${
+                isDropdownOpen ? styles.open : ''
+              }`}>
+              {user && (
+                <img
+                  className={`${styles.userProfilePicture} ${
+                    isDropdownOpen ? styles.open : ''
+                  }`}
+                  src={user.profilePictureSrc}
+                  alt={`User ${user.fullName}`}
+                />
+              )}
+            </button>
+          </li>
+          {isDropdownOpen && (
+            <ul className={styles.dropdownMenu}>
+              <li className={styles.dropdownItem}>
+                <Link
+                  to="/profile"
+                  className={styles.link}>
+                  <img
+                    src="/logos/user_icon.png"
+                    alt="Profile"
+                    className={styles.linkIcon}
+                  />
+                  Profile
+                </Link>
+              </li>
+              <li className={styles.dropdownItem}>
+                <button
+                  className={styles.logoutBtn}
+                  onClick={onLogout}>
+                  Log Out
+                </button>
+              </li>
+            </ul>
+          )}
         </ul>
       </nav>
       <Overlay
