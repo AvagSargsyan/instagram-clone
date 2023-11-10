@@ -26,7 +26,7 @@ const Post = ({ user, post, className }) => {
       </section>
       <section className={styles.postInfo}>
         <p className={styles.postContent}>
-          <span className={styles.inlineUsername}>{user.name}</span>{' '}
+          <span className={styles.inlineUsername}>{post.author.name}</span>{' '}
           {post.content}
         </p>
         <p className={styles.time}>{timeAgo}</p>
