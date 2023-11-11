@@ -1,9 +1,9 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../../features/auth/auth.slice';
 import InstagramLogo from '../InstagramLogo/InstagramLogo';
 import styles from './UserHeader.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Overlay from '../Overlay/Overlay';
 import CreatePost from '../CreatePost/CreatePost';
 
@@ -14,6 +14,7 @@ function UserHeader() {
 
   const [isCreatePostWindowOpen, setIsCreatePostWindowOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const location = useLocation();
 
   const openCreatePostWindow = () => {
     setIsCreatePostWindowOpen(true);
@@ -65,7 +66,7 @@ function UserHeader() {
               {user && (
                 <img
                   className={`${styles.userProfilePicture} ${
-                    isDropdownOpen ? styles.open : ''
+                    isDropdownOpen || location.pathname === '/profile' ? styles.open : ''
                   }`}
                   src={user.profilePictureSrc}
                   alt={`User ${user.fullName}`}

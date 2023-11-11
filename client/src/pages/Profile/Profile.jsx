@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserHeader from '../../components/UserHeader/UserHeader';
 import { getOwnPosts, reset, deletePost } from '../../features/post/post.slice';
+import styles from './Profile.module.scss';
 
 function Profile() {
   const { user } = useSelector((state) => state.auth);
@@ -25,36 +26,54 @@ function Profile() {
   }, [user, dispatch, navigate]);
 
   return (
-    <section>
+    <div className={styles.pageWrapper}>
       <UserHeader />
-      <div>
-        <img
-          src={user.profilePictureSrc}
-          alt={`User ${user.fullName}`}
-        />
-        <h1>{user.name}</h1>
-        <div>{posts && posts.length} posts</div>
-        <div>{user.fullName}</div>
-      </div>
-      {isLoading ? (
-        // todo: Add a loading spinner
-        'Loading...'
-      ) : (
-        <div>
-          <section>
-            <h3>My posts</h3>
-            {posts.length > 0 ? (
+      <div className={styles.page}>
+        <main className={styles.profile}>
+          <div className={styles.profilePictureContainer}>
+            <img
+              className={styles.profilePicture}
+              src={user.profilePictureSrc}
+              alt={`User ${user.fullName}`}
+            />
+          </div>
+          <div className={styles.profileInfo}>
+            <h1 className={styles.username}>{user.name}</h1>
+            <div className={styles.stats}>
               <div>
+                <span className={styles.statNumber}>
+                  {posts && posts.length}
+                </span>
+                posts
+              </div>
+              {/* // todo: Change this hardcoded values */}
+              <div>
+                <span className={styles.statNumber}>0 </span> followers
+              </div>
+              <div>
+                <span className={styles.statNumber}>0 </span> following
+              </div>
+            </div>
+            <div className={styles.fullName}>{user.fullName}</div>
+          </div>
+        </main>
+        {isLoading ? (
+          // todo: Add a loading spinner
+          'Loading...'
+        ) : (
+          <section className={styles.posts}>
+            <h3 className={styles.postsHeading}>posts</h3>
+            {posts.length > 0 ? (
+              <div className={styles.postsGrid}>
                 {posts.map((post) => (
-                  <div key={post._id}>
-                    <p>{post.content}</p>
+                  <div
+                    key={post._id}
+                    className={styles.post}>
                     <img
                       src={post.imageSrc}
                       alt={`Post ${post._id}`}
+                      className={styles.postImage}
                     />
-                    <button onClick={() => dispatch(deletePost(post._id))}>
-                      x
-                    </button>
                   </div>
                 ))}
               </div>
@@ -64,9 +83,9 @@ function Profile() {
               <h3>You haven't posted anything yet.</h3>
             )}
           </section>
-        </div>
-      )}
-    </section>
+        )}
+      </div>
+    </div>
   );
 }
 
