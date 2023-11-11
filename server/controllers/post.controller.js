@@ -33,7 +33,12 @@ const addPost = asyncHandler(async (req, res) => {
     imageSrc: `/uploads/images/${req.uploadedFileName}`
   });
 
-  res.status(201).json(post);
+  const serializedPost = await post.populate({
+    path: 'author',
+    select: 'name'
+  });
+
+  res.status(201).json(serializedPost);
 });
 
 // req: PUT /api/posts/:id
