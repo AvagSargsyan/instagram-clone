@@ -1,0 +1,21 @@
+.prevButton {
+  --color: var(--tertiary-button-border);
+  --hover-color: var(--tertiary-button-hover);
+
+  background: transparent;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+
+  svg {
+    fill: var(--color);
+    height: 24px;
+    width: 24px;
+  }
+
+  &:hover {
+    svg {
+      fill: var(--hover-color);
+    }
+  }
+}

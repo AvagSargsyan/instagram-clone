@@ -7,9 +7,15 @@
   background: var(--background-color);
   color: var(--text-color-dark);
   width: 100%;
-  
+
   .main {
     padding: 30px 22vw;
+
+    .feed {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
 
     .message {
       margin-top: 10px;

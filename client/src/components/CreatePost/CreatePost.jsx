@@ -33,13 +33,13 @@ function CreatePost() {
     setImage(selectedImage);
   };
 
-  if (isPostCreated && isSuccess) {
-    return 'Your post has been shared.';
-  }
-
   if (isPostCreated && isLoading) {
     // todo: Add a loading spinner
     return 'Loading...';
+  }
+
+  if (isPostCreated && isSuccess) {
+    return 'Your post has been shared.';
   }
 
   if (isPostCreated && isError) {

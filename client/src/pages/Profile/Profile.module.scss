@@ -106,3 +106,28 @@
     }
   }
 }
+
+.postDetailsModal {
+  padding: 0;
+  background: transparent;
+  position: relative;
+
+  button {
+    position: absolute;
+    top: 50%;
+  }
+
+  .prevPostBtn {
+    transform: translate(-100%, -50%);
+  }
+
+  .nextPostBtn {
+    right: 0;
+    transform: translate(100%, -50%);
+  }
+
+  .postDetails {
+    background: transparent;
+    padding: 0;
+  }
+}

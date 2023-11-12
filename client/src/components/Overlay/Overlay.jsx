@@ -18,7 +18,7 @@ function Overlay({ isOpen, onClose, children }) {
         <button
           className={styles.closeBtn}
           onClick={onClose}>
-          x
+          &times;
         </button>
         {children}
       </div>

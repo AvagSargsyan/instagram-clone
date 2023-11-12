@@ -5,17 +5,24 @@ import fs from 'fs';
 
 // req: GET /api/posts/all
 const getAllPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find().sort('-createdAt').populate({
-    path: 'author',
-    select: ['name', 'profilePictureSrc']
-  });
+  const posts = await Post.find()
+    .sort('-createdAt')
+    .populate({
+      path: 'author',
+      select: ['name', 'profilePictureSrc']
+    });
 
   res.status(200).json(posts);
 });
 
 // req: GET /api/posts
 const getOwnPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find({ author: req.user.id }).sort('-createdAt');
+  const posts = await Post.find({ author: req.user.id })
+    .sort('-createdAt')
+    .populate({
+      path: 'author',
+      select: ['name', 'profilePictureSrc']
+    });
 
   res.status(200).json(posts);
 });
@@ -35,7 +42,7 @@ const addPost = asyncHandler(async (req, res) => {
 
   const serializedPost = await post.populate({
     path: 'author',
-    select: 'name'
+    select: ['name', 'profilePictureSrc']
   });
 
   res.status(201).json(serializedPost);
