@@ -83,10 +83,10 @@ const OwnPost = ({ post, className }) => {
         onClose={closeOptionsMenu}>
         <ul className={styles.optionsMenu}>
           <li className={styles.optionsMenuItem}>
-            <div onClick={() => deleteCurrentPost(post._id)}>Delete</div>
+            <button className={`${styles.deletePostBtn} ${styles.optionsMenuBtn}`} onClick={() => deleteCurrentPost(post._id)}>Delete</button>
           </li>
           <li className={styles.optionsMenuItem}>
-            <div onClick={closeOptionsMenu}>Cancel</div>
+            <button className={`${styles.cancelBtn} ${styles.optionsMenuBtn}`} onClick={closeOptionsMenu}>Cancel</button>
           </li>
         </ul>
       </Overlay>
