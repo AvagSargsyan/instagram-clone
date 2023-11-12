@@ -7,7 +7,7 @@ import fs from 'fs';
 const getAllPosts = asyncHandler(async (req, res) => {
   const posts = await Post.find().sort('-createdAt').populate({
     path: 'author',
-    select: 'name'
+    select: ['name', 'profilePictureSrc']
   });
 
   res.status(200).json(posts);

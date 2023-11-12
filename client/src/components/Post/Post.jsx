@@ -1,32 +1,32 @@
 import { formatDistanceToNow } from 'date-fns';
 import styles from './Post.module.scss';
 
-const Post = ({ user, post, className }) => {
+const Post = ({ post, className }) => {
   const timeAgo = formatDistanceToNow(new Date(post.createdAt), {
     addSuffix: true
   });
 
   return (
     <div className={`${styles.post} ${className}`}>
-      <section className={styles.user}>
+      <section className={styles.author}>
         <img
-          className={styles.userProfilePicture}
-          src={user.profilePictureSrc}
-          alt={`User ${user.fullName}`}
+          className={styles.authorProfilePicture}
+          src={post.author.profilePictureSrc}
+          alt={`User ${post.author.fullName}`}
         />
-        <div className={styles.username}>{post.author.name}</div>
+        <div className={styles.authorName}>{post.author.name}</div>
         <div className={styles.options}>...</div>
       </section>
       <section className={styles.postImageContainer}>
         <img
           className={styles.image}
           src={post.imageSrc}
-          alt={`${user.name}'s post`}
+          alt={`${post.author.name}'s post`}
         />
       </section>
       <section className={styles.postInfo}>
         <p className={styles.postContent}>
-          <span className={styles.inlineUsername}>{post.author.name}</span>{' '}
+          <span className={styles.inlineAuthorName}>{post.author.name}</span>{' '}
           {post.content}
         </p>
         <p className={styles.time}>{timeAgo}</p>
