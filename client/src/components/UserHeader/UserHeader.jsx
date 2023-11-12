@@ -51,7 +51,7 @@ function UserHeader() {
               onClick={openCreatePostWindow}
               className={styles.addPostBtn}>
               <img
-                src="/logos/add_icon.png"
+                src="/icons/add_icon.png"
                 alt="Create post"
                 className={styles.addPostIcon}
               />
@@ -81,7 +81,7 @@ function UserHeader() {
                   to="/profile"
                   className={styles.link}>
                   <img
-                    src="/logos/user_icon.png"
+                    src="/icons/user_icon.png"
                     alt="Profile"
                     className={styles.linkIcon}
                   />

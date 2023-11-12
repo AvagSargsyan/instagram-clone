@@ -17,7 +17,7 @@ function InstagramLogo({ className, size = 'big' }) {
       style={componentStyles}>
       <img
         className={styles.instagramLogoImg}
-        src="/logos/instagram_logo.png"
+        src="/icons/instagram_logo.png"
         alt="Instagram"
         style={imgStyles}
       />

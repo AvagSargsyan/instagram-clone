@@ -64,7 +64,7 @@ function Register() {
               href="#"
               className={`btn-default ${styles.facebookBtn}`}>
               <img
-                src="/logos/facebook_logo.png"
+                src="/icons/facebook_logo.png"
                 alt="Facebook"
               />
               <span>Log in with Facebook</span>

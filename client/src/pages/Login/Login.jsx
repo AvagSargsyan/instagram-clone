@@ -86,7 +86,7 @@ function Login() {
               href="#"
               className={styles.facebookBtn}>
               <img
-                src="/logos/facebook_logo_blue.png"
+                src="/icons/facebook_logo_blue.png"
                 alt="Facebook"
               />
               <span>Log in with Facebook</span>
