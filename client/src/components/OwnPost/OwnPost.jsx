@@ -33,15 +33,15 @@ const OwnPost = ({ post, className }) => {
 
   if (isPostDeleted && isLoading) {
     // todo: Add a loading spinner
-    return 'Loading...';
+    return <div className={styles.stateMessage}>Loading...</div>;
   }
 
   if (isPostDeleted && isSuccess) {
-    return 'Your post has been deleted.';
+    return <div className={styles.message}>Your post has been deleted.</div>;
   }
 
   if (isPostDeleted && isError) {
-    return 'An error accured while deleting your post.';
+    return <div className={styles.stateMessage}>An error accured while deleting your post.</div>;
   }
 
   return (
@@ -53,20 +53,23 @@ const OwnPost = ({ post, className }) => {
           alt={`${post.author.name}'s post`}
         />
       </div>
-      <div>
+      <div className={styles.postDetails}>
         <section className={styles.author}>
-          <img
-            className={styles.authorProfilePicture}
-            src={post.author.profilePictureSrc}
-            alt={`User ${post.author.fullName}`}
-          />
-          <div className={styles.authorName}>{post.author.name}</div>
-          <button
-            className={styles.options}
-            onClick={openOptionsMenu}>
-            ...
-          </button>
+          <div className={styles.authorAndOptions}>
+            <img
+              className={styles.authorProfilePicture}
+              src={post.author.profilePictureSrc}
+              alt={`User ${post.author.fullName}`}
+            />
+            <div className={styles.authorName}>{post.author.name}</div>
+            <button
+              className={styles.options}
+              onClick={openOptionsMenu}>
+              ...
+            </button>
+          </div>
         </section>
+
         <section className={styles.postInfo}>
           <p className={styles.postContent}>
             <span className={styles.inlineAuthorName}>{post.author.name}</span>{' '}
@@ -78,7 +81,6 @@ const OwnPost = ({ post, className }) => {
       <Overlay
         isOpen={isOptionsMenuOpen}
         onClose={closeOptionsMenu}>
-        {}
         <ul className={styles.optionsMenu}>
           <li className={styles.optionsMenuItem}>
             <div onClick={() => deleteCurrentPost(post._id)}>Delete</div>
