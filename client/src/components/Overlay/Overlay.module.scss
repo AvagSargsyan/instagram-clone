@@ -1,0 +1,40 @@
+.overlay {
+  --background-color: var(--primary-background);
+  --close-btn-color: var(--tertiary-button-border);
+  --close-btn-hover-color: var(--tertiary-button-hover);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  .modal {
+    max-width: 95%;
+    max-height: 95%;
+    background: var(--background-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+  }
+
+  .closeBtn {
+    color: var(--close-btn-color);
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 10px;
+    font-size: 40px;
+
+    &:hover {
+      color: var(--close-btn-hover-color);
+    }
+  }
+}

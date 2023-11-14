@@ -32,7 +32,7 @@ function Register() {
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  const { name, fullName, email, password } = formData;
+  const { name, email, fullName, password } = formData;
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -44,79 +44,81 @@ function Register() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const userData = { name, email, password };
+    const userData = { name, email, fullName, password };
 
     dispatch(register(userData));
   };
 
   return (
-    <section className={styles.container}>
-      <div className={styles.formContainer}>
-        <InstagramLogo className={styles.logo} />
-        <form
-          onSubmit={onSubmit}
-          className={styles.form}>
-          <p className={styles.mainText}>
-            Sign up to see photos and videos from your friends.
-          </p>
-          <a
-            href="#"
-            className={`btn-default ${styles.facebookBtn}`}>
-            <img
-              src="/logos/facebook_logo.png"
-              alt="Facebook"
-            />
-            <span>Log in with Facebook</span>
-          </a>
-          <div className={styles.or}>
-            <div className={styles.line}></div>
-            <div className={styles.orText}>or</div>
-          </div>
-          <FormControl
-            type="email"
-            name="email"
-            value={email}
-            onChange={onChange}>
-            Mobile number or email address
-          </FormControl>
-          <FormControl
-            type="text"
-            name="fullName"
-            value={fullName}
-            onChange={onChange}>
-            Full Name
-          </FormControl>
-          <FormControl
-            type="text"
-            name="name"
-            value={name}
-            onChange={onChange}>
-            Username
-          </FormControl>
-          <FormControl
-            type="password"
-            name="password"
-            value={password}
-            onChange={onChange}>
-            Password
-          </FormControl>
-          <button
-            type="submit"
-            className={`btn-default ${styles.signupBtn}`}>
-            {/* todo: Add a loading spinner */}
-            {isLoading ? 'Loading...' : 'Sign up'}
-          </button>
-        </form>
-      </div>
-      <div className={styles.loginPrompt}>
-        Have an account?&nbsp;
-        <Link
-          to="/login"
-          className={styles.login}>
-          Log in
-        </Link>
-      </div>
-    </section>
+    <div className={styles.pageWrapper}>
+      <section className={styles.container}>
+        <div className={styles.formContainer}>
+          <InstagramLogo className={styles.logo} />
+          <form
+            onSubmit={onSubmit}
+            className={styles.form}>
+            <p className={styles.mainText}>
+              Sign up to see photos and videos from your friends.
+            </p>
+            <a
+              href="#"
+              className={`btn-default ${styles.facebookBtn}`}>
+              <img
+                src="/icons/facebook_logo.png"
+                alt="Facebook"
+              />
+              <span>Log in with Facebook</span>
+            </a>
+            <div className={styles.or}>
+              <div className={styles.line}></div>
+              <div className={styles.orText}>or</div>
+            </div>
+            <FormControl
+              type="email"
+              name="email"
+              value={email}
+              onChange={onChange}>
+              Mobile number or email address
+            </FormControl>
+            <FormControl
+              type="text"
+              name="fullName"
+              value={fullName}
+              onChange={onChange}>
+              Full Name
+            </FormControl>
+            <FormControl
+              type="text"
+              name="name"
+              value={name}
+              onChange={onChange}>
+              Username
+            </FormControl>
+            <FormControl
+              type="password"
+              name="password"
+              value={password}
+              onChange={onChange}>
+              Password
+            </FormControl>
+            <button
+              type="submit"
+              className={`btn-default ${styles.signupBtn}`}>
+              {/* todo: Add a loading spinner */}
+              {isLoading ? 'Loading...' : 'Sign up'}
+            </button>
+          </form>
+        </div>
+        <div className={styles.loginPrompt}>
+          Have an account?&nbsp;
+          <Link
+            to="/login"
+            className={styles.login}>
+            Log in
+          </Link>
+        </div>
+      </section>
+    </div>
   );
 }
 

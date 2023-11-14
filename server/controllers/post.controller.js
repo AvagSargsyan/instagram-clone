@@ -1,14 +1,15 @@
 import asyncHandler from 'express-async-handler';
 import Post from '../models/post.model.js';
+import path from 'path';
+import fs from 'fs';
 
 // req: GET /api/posts/all
 const getAllPosts = asyncHandler(async (req, res) => {
-  const posts = await Post
-    .find()
+  const posts = await Post.find()
     .sort('-createdAt')
     .populate({
       path: 'author',
-      select: 'name'
+      select: ['name', 'profilePictureSrc']
     });
 
   res.status(200).json(posts);
@@ -16,24 +17,31 @@ const getAllPosts = asyncHandler(async (req, res) => {
 
 // req: GET /api/posts
 const getOwnPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find({ author: req.user.id });
+  const posts = await Post.find({ author: req.user.id })
+    .sort('-createdAt')
+    .populate({
+      path: 'author',
+      select: ['name', 'profilePictureSrc']
+    });
 
   res.status(200).json(posts);
 });
 
 // req: POST /api/posts
 const addPost = asyncHandler(async (req, res) => {
-  if (!req.body.content) {
-    res.status(400);
-    throw new Error('Please add a content field');
-  }
 
   const post = await Post.create({
     content: req.body.content,
-    author: req.user.id
+    author: req.user.id,
+    imageSrc: `/uploads/images/${req.uploadedFileName}`
   });
 
-  res.status(201).json(post);
+  const serializedPost = await post.populate({
+    path: 'author',
+    select: ['name', 'profilePictureSrc']
+  });
+
+  res.status(201).json(serializedPost);
 });
 
 // req: PUT /api/posts/:id
@@ -89,6 +97,17 @@ const deletePost = asyncHandler(async (req, res) => {
     throw new Error('User not authorized');
   }
 
+  // Delete the associated image file
+  const imagePath = path.join('server/', post.imageSrc);
+  try {
+    await fs.promises.unlink(imagePath);
+  } catch (err) {
+    console.error(`Error deleting image: ${err}`);
+    res.status(500);
+    throw new Error('Image deletion failed');
+  }
+
+  // Delete the post from the database
   await post.deleteOne();
 
   res.status(200).json({ id: req.params.id });

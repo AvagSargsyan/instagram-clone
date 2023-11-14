@@ -8,8 +8,11 @@ const postSchema = mongoose.Schema(
       ref: 'User'
     },
     content: {
+      type: String
+    },
+    imageSrc: {
       type: String,
-      required: [true, 'Please add a content value']
+      required: [true, 'Please add an imageSrc value']
     }
   },
   {

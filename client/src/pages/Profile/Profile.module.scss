@@ -1,0 +1,133 @@
+.pageWrapper {
+  --background-color: var(--primary-background);
+  --text-color-dark: var(--primary-text);
+  --text-color-mid: var(--primary-icon);
+  --text-color-light: var(--secondary-text);
+  --border-color: var(--separator);
+  --link-color: var(--link);
+
+  background: var(--background-color);
+  color: var(--text-color-dark);
+  width: 100%;
+
+  .page {
+    padding: 30px 22vw;
+
+    .profile {
+      color: var(--text-color-mid);
+      padding: 10px 30px;
+      display: flex;
+
+      .profilePictureContainer {
+        min-width: 120px;
+        max-width: 200px;
+
+        .profilePicture {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      .profileInfo {
+        padding-left: 80px;
+
+        .username {
+          font-weight: 400;
+          font-size: 35px;
+        }
+
+        .stats {
+          margin: 15px 0;
+          display: flex;
+          gap: 25px;
+
+          div {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+          }
+
+          .statNumber {
+            font-weight: 700;
+            font-size: 18px;
+          }
+        }
+
+        .fullName {
+          font-weight: 700;
+          font-size: 18px;
+        }
+      }
+    }
+
+    .posts {
+      .postsHeading {
+        text-transform: uppercase;
+        color: var(--text-color-light);
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: 1px;
+        padding: 15px 5px;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .postsGrid {
+        $grid-gap: 15px;
+        $grid-item-size: 15vw;
+
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax($grid-item-size, 1fr));
+        gap: $grid-gap;
+
+        .post {
+          overflow: hidden;
+          position: relative;
+          cursor: pointer;
+
+          &:hover {
+            &::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: rgba(0, 0, 0, 0.25);
+            }
+          }
+
+          .postImage {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+}
+
+.postDetailsModal {
+  padding: 0;
+  background: transparent;
+  position: relative;
+
+  .prevPostBtn, .nextPostBtn {
+    position: absolute;
+    top: 50%;
+  }
+
+  .prevPostBtn {
+    transform: translate(-100%, -50%);
+  }
+
+  .nextPostBtn {
+    right: 0;
+    transform: translate(100%, -50%);
+  }
+
+  .postDetails {
+    background: transparent;
+    padding: 0;
+  }
+}
