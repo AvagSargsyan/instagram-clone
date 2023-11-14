@@ -25,10 +25,12 @@ const Post = ({ post, className }) => {
         />
       </section>
       <section className={styles.postInfo}>
-        <p className={styles.postContent}>
-          <span className={styles.inlineAuthorName}>{post.author.name}</span>{' '}
-          {post.content}
-        </p>
+        {post.content && (
+          <p className={styles.postContent}>
+            <span className={styles.inlineAuthorName}>{post.author.name}</span>{' '}
+            {post.content}
+          </p>
+        )}
         <p className={styles.time}>{timeAgo}</p>
       </section>
     </div>

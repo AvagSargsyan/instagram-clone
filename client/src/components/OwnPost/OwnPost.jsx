@@ -41,7 +41,11 @@ const OwnPost = ({ post, className }) => {
   }
 
   if (isPostDeleted && isError) {
-    return <div className={styles.stateMessage}>An error accured while deleting your post.</div>;
+    return (
+      <div className={styles.stateMessage}>
+        An error accured while deleting your post.
+      </div>
+    );
   }
 
   return (
@@ -71,10 +75,14 @@ const OwnPost = ({ post, className }) => {
         </section>
 
         <section className={styles.postInfo}>
-          <p className={styles.postContent}>
-            <span className={styles.inlineAuthorName}>{post.author.name}</span>{' '}
-            {post.content}
-          </p>
+          {post.content && (
+            <p className={styles.postContent}>
+              <span className={styles.inlineAuthorName}>
+                {post.author.name}
+              </span>{' '}
+              {post.content}
+            </p>
+          )}
           <p className={styles.time}>{timeAgo}</p>
         </section>
       </div>
@@ -83,10 +91,18 @@ const OwnPost = ({ post, className }) => {
         onClose={closeOptionsMenu}>
         <ul className={styles.optionsMenu}>
           <li className={styles.optionsMenuItem}>
-            <button className={`${styles.deletePostBtn} ${styles.optionsMenuBtn}`} onClick={() => deleteCurrentPost(post._id)}>Delete</button>
+            <button
+              className={`${styles.deletePostBtn} ${styles.optionsMenuBtn}`}
+              onClick={() => deleteCurrentPost(post._id)}>
+              Delete
+            </button>
           </li>
           <li className={styles.optionsMenuItem}>
-            <button className={`${styles.cancelBtn} ${styles.optionsMenuBtn}`} onClick={closeOptionsMenu}>Cancel</button>
+            <button
+              className={`${styles.cancelBtn} ${styles.optionsMenuBtn}`}
+              onClick={closeOptionsMenu}>
+              Cancel
+            </button>
           </li>
         </ul>
       </Overlay>

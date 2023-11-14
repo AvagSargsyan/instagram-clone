@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost } from '../../features/post/post.slice';
 
@@ -7,30 +7,37 @@ function CreatePost() {
   const { posts, isLoading, isSuccess, isError } = useSelector(
     (state) => state.post
   );
-  const [content, setContent] = useState('');
+  const { user } = useSelector((state) => state.auth);
+
   const [image, setImage] = useState(null);
+  const [content, setContent] = useState('');
+  const [step, setStep] = useState(1);
   const [isPostCreated, setIsPostCreated] = useState(false);
 
-  const onContentChange = (e) => {
-    setContent(e.target.value);
+  const onImageChange = (e) => {
+    const selectedImage = e.target.files[0];
+    setImage(selectedImage);
+    setStep(2);
   };
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
+  const goToPrevStep = () => {
+    setStep((prevState) => prevState - 1);
+  };
 
+  const goToNextStep = () => {
+    setStep((prevState) => prevState + 1);
+  };
+
+  const sharePost = () => {
     const formData = new FormData();
     formData.append('content', content);
     formData.append('image', image);
 
     dispatch(createPost(formData));
-    setContent('');
     setImage(null);
+    setContent('');
+    setStep(1);
     setIsPostCreated(true);
-  };
-
-  const onImageChange = (e) => {
-    const selectedImage = e.target.files[0];
-    setImage(selectedImage);
   };
 
   if (isPostCreated && isLoading) {
@@ -43,33 +50,85 @@ function CreatePost() {
   }
 
   if (isPostCreated && isError) {
-    return 'An error accured while sharing your post.';
+    return 'An error occurred while sharing your post.';
   }
 
   return (
     <div>
-      <h2>Create new post</h2>
-      <form onSubmit={onSubmit}>
+      {step === 1 && (
         <div>
-          <input
-            type="text"
-            placeholder="What's on your mind?"
-            value={content}
-            onChange={onContentChange}
-          />
+          <h2>Create new post</h2>
+          <button>
+            <label htmlFor="upload-image">Select Image</label>
+            <input
+              id="upload-image"
+              type="file"
+              accept=".jpg, .jpeg, .png"
+              onChange={onImageChange}
+              style={{ display: 'none' }}
+            />
+          </button>
         </div>
-        <div>
-          <label>Upload Image:</label>
-          <input
-            type="file"
-            accept=".jpg, .jpeg, .png"
-            onChange={onImageChange}
-          />
-        </div>
-        <div>
-          <button type="submit" disabled={!(image && content)}>Post</button>
-        </div>
-      </form>
+      )}
+
+      {step === 2 && (
+        <>
+          <header>
+            <button onClick={goToPrevStep}>
+              <img
+                src="/icons/left_arrow.png"
+                alt="Back"
+              />
+            </button>
+            <h2>Preview</h2>
+            <button onClick={goToNextStep}>Next</button>
+          </header>
+          <div>
+            <img
+              src={URL.createObjectURL(image)}
+              alt="Preview"
+              style={{ maxWidth: '100%' }}
+            />
+          </div>
+        </>
+      )}
+
+      {step === 3 && (
+        <>
+          <header>
+            <button onClick={goToPrevStep}>
+              <img
+                src="/icons/left_arrow.png"
+                alt="Back"
+              />
+            </button>
+            <h2>Create new post</h2>
+            <button onClick={sharePost}>Share</button>
+          </header>
+          <div>
+            <div>
+              <img
+                src={user.profilePictureSrc}
+                alt={`User ${user.fullName}`}
+              />
+              <div>{user.name}</div>
+            </div>
+            <input
+              type="text"
+              placeholder="Write a caption..."
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </div>
+          <div>
+            <img
+              src={URL.createObjectURL(image)}
+              alt="Chosen"
+              style={{ maxWidth: '100%' }}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -29,10 +29,6 @@ const getOwnPosts = asyncHandler(async (req, res) => {
 
 // req: POST /api/posts
 const addPost = asyncHandler(async (req, res) => {
-  if (!req.body.content) {
-    res.status(400);
-    throw new Error('Please add a content field');
-  }
 
   const post = await Post.create({
     content: req.body.content,
