@@ -13,10 +13,16 @@ function CreatePost() {
   const [content, setContent] = useState('');
   const [step, setStep] = useState(1);
   const [isPostCreated, setIsPostCreated] = useState(false);
+  const [previewImageSrc, setPreviewImageSrc] = useState(null);
 
   const onImageChange = (e) => {
     const selectedImage = e.target.files[0];
     setImage(selectedImage);
+
+    if (selectedImage) {
+      setPreviewImageSrc(URL.createObjectURL(selectedImage));
+    }
+
     setStep(2);
   };
 
@@ -85,7 +91,7 @@ function CreatePost() {
           </header>
           <div>
             <img
-              src={URL.createObjectURL(image)}
+              src={previewImageSrc}
               alt="Preview"
               style={{ maxWidth: '100%' }}
             />
@@ -122,7 +128,7 @@ function CreatePost() {
           </div>
           <div>
             <img
-              src={URL.createObjectURL(image)}
+              src={previewImageSrc}
               alt="Chosen"
               style={{ maxWidth: '100%' }}
             />
