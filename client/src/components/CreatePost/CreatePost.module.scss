@@ -1,0 +1,155 @@
+@import '../../index.scss';
+
+.stepOne {
+  --background-color: var(--primary-background);
+  --text-color-dark: var(--primary-text);
+  --text-color-light: var(--secondary-text);
+  --border-color: var(--separator);
+  --button-color: var(--primary-button);
+  --button-hover-color: var(--primary-button-hover);
+
+  background: var(--background-color);
+  border-radius: 8px;
+  width: 60vw;
+  min-width: 300px;
+  max-width: 700px;
+  height: 60vh;
+  max-height: 500px;
+  min-height: 250px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .createNewPostHeading {
+    font-size: 16px;
+    color: var(--primary-text);
+    padding: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .stepOneContent {
+    position: relative;
+    height: 100%;
+
+    .selectImageBtn {
+      padding: 0;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+
+      label {
+        background: var(--button-color);
+        cursor: pointer;
+        padding: 8px 16px;
+        border-radius: 6px;
+
+        &:hover {
+          background: var(--button-hover-color);
+        }
+      }
+    }
+  }
+}
+
+.stepTwo {
+  --background-color: var(--primary-background);
+  --text-color-dark: var(--primary-text);
+  --text-color-light: var(--secondary-text);
+  --border-color: var(--separator);
+  --button-color: var(--primary-button);
+  --button-hover-color: var(--primary-button-hover);
+
+  background: var(--background-color);
+  border-radius: 8px;
+
+  .stepTwoImageContainer {
+    padding: 0;
+    height: 85vh;
+
+    img {
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.stepThree {
+  --background-color: var(--primary-background);
+  --text-color-dark: var(--primary-text);
+  --text-color-light: var(--tertiary-text);
+  --border-color: var(--separator);
+  --button-color: var(--primary-button);
+  --button-hover-color: var(--primary-button-hover);
+
+  .stepThreeContent {
+    display: flex;
+
+    .postImageContainer {
+      padding: 0;
+      height: 85vh;
+
+      .postImage {
+        border-bottom-left-radius: 8px;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .postDetails {
+      width: clamp(300px, 35vw, 400px);
+
+      .user {
+        color: var(--text-color-dark);
+        display: flex;
+        align-items: center;
+        padding: 8px 10px;
+        gap: 10px;
+
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+        }
+
+        .username {
+          font-weight: 700;
+          font-size: 15px;
+        }
+      }
+
+      .postCaptionContainer {
+        padding: 2px 5px;
+        border-bottom: 1px solid var(--border-color);
+
+        .postCaption {
+          font-family: var(--font-family);
+          line-height: 22px;
+          width: 100%;
+          padding: 10px;
+          font-size: 15px;
+          border: none;
+          outline: none;
+          resize: none;
+          overflow: auto;
+          transition: border-color 0.3s;
+        }
+
+        .charCount {
+          color: var(--text-color-light);
+          padding: 5px;
+          text-align: end;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+.stateMessage {
+  padding: 40vh 14vw;
+  font-size: 20px;
+}

@@ -37,7 +37,7 @@ const OwnPost = ({ post, className }) => {
   }
 
   if (isPostDeleted && isSuccess) {
-    return <div className={styles.message}>Your post has been deleted.</div>;
+    return <div className={styles.stateMessage}>Your post has been deleted.</div>;
   }
 
   if (isPostDeleted && isError) {

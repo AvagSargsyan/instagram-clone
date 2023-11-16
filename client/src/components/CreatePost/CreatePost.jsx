@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost } from '../../features/post/post.slice';
+import styles from './CreatePost.module.scss';
+import WindowHeader from '../WindowHeader/WindowHeader';
 
 function CreatePost() {
   const dispatch = useDispatch();
@@ -46,96 +48,119 @@ function CreatePost() {
     setIsPostCreated(true);
   };
 
+  const charCount = content.length;
+  const maxCharCount = 2200;
+
+  const onContentChange = (e) => {
+    const userInput = e.target.value;
+    if (userInput.length <= maxCharCount) {
+      setContent(userInput);
+    }
+  };
+
   if (isPostCreated && isLoading) {
     // todo: Add a loading spinner
-    return 'Loading...';
+    return <div className={styles.stateMessage}>Loading...</div>;
   }
 
   if (isPostCreated && isSuccess) {
-    return 'Your post has been shared.';
+    return (
+      <div className={styles.stateMessage}>Your post has been shared.</div>
+    );
   }
 
   if (isPostCreated && isError) {
-    return 'An error occurred while sharing your post.';
+    return (
+      <div className={styles.stateMessage}>
+        An error accured while sharing your post.
+      </div>
+    );
   }
 
   return (
-    <div>
+    <>
       {step === 1 && (
-        <div>
-          <h2>Create new post</h2>
-          <button>
-            <label htmlFor="upload-image">Select Image</label>
-            <input
-              id="upload-image"
-              type="file"
-              accept=".jpg, .jpeg, .png"
-              onChange={onImageChange}
-              style={{ display: 'none' }}
-            />
-          </button>
+        <div className={styles.stepOne}>
+          <h2 className={styles.createNewPostHeading}>Create new post</h2>
+          <div className={styles.stepOneContent}>
+            <button className={`${styles.selectImageBtn} btn-default`}>
+              <label
+                htmlFor="upload-image"
+                className={styles.selectImageLabel}>
+                Select Image
+              </label>
+              <input
+                id="upload-image"
+                type="file"
+                accept=".jpg, .jpeg, .png"
+                onChange={onImageChange}
+                style={{ display: 'none' }}
+              />
+            </button>
+          </div>
         </div>
       )}
 
       {step === 2 && (
-        <>
-          <header>
-            <button onClick={goToPrevStep}>
-              <img
-                src="/icons/left_arrow.png"
-                alt="Back"
-              />
-            </button>
-            <h2>Preview</h2>
-            <button onClick={goToNextStep}>Next</button>
-          </header>
-          <div>
+        <div className={styles.stepTwo}>
+          <WindowHeader
+            prevBtnAction={goToPrevStep}
+            nextBtnAction={goToNextStep}>
+            <>Preview</>
+            <>Next</>
+          </WindowHeader>
+          <div className={styles.stepTwoImageContainer}>
             <img
               src={previewImageSrc}
               alt="Preview"
               style={{ maxWidth: '100%' }}
             />
           </div>
-        </>
+        </div>
       )}
 
       {step === 3 && (
-        <>
-          <header>
-            <button onClick={goToPrevStep}>
+        <div className={styles.stepThree}>
+          <WindowHeader
+            prevBtnAction={goToPrevStep}
+            nextBtnAction={sharePost}>
+            <>Create new post</>
+            <>Share</>
+          </WindowHeader>
+          <div className={styles.stepThreeContent}>
+            <div className={styles.postImageContainer}>
               <img
-                src="/icons/left_arrow.png"
-                alt="Back"
+                className={styles.postImage}
+                src={previewImageSrc}
+                alt="Chosen"
+                style={{ maxWidth: '100%' }}
               />
-            </button>
-            <h2>Create new post</h2>
-            <button onClick={sharePost}>Share</button>
-          </header>
-          <div>
-            <div>
-              <img
-                src={user.profilePictureSrc}
-                alt={`User ${user.fullName}`}
-              />
-              <div>{user.name}</div>
             </div>
-            <input
-              type="text"
-              placeholder="Write a caption..."
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
+            <div className={styles.postDetails}>
+              <div className={styles.user}>
+                <img
+                  src={user.profilePictureSrc}
+                  alt={`User ${user.fullName}`}
+                />
+                <div className={styles.username}>{user.name}</div>
+              </div>
+              <div className={styles.postCaptionContainer}>
+                <textarea
+                  className={styles.postCaption}
+                  placeholder="Write a caption..."
+                  value={content}
+                  onChange={onContentChange}
+                  rows={7}
+                />
+                <div className={styles.charCount}>
+                  {charCount} / {maxCharCount}
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <img
-              src={previewImageSrc}
-              alt="Chosen"
-              style={{ maxWidth: '100%' }}
-            />
-          </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 }
 
