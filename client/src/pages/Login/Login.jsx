@@ -5,6 +5,7 @@ import { login, reset } from '../../features/auth/auth.slice';
 import FormControl from '../../components/FormControl/FormControl';
 import styles from './Login.module.scss';
 import InstagramLogo from '../../components/InstagramLogo/InstagramLogo';
+import Spinner from '../../components/Spinner/Spinner';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -75,8 +76,7 @@ function Login() {
             <button
               type="submit"
               className={`btn-default ${styles.loginBtn}`}>
-              {/* todo: Add a loading spinner */}
-              {isLoading ? 'Loading...' : 'Log in'}
+              {isLoading ? <Spinner size="small" /> : 'Log in'}
             </button>
             <div className={styles.or}>
               <div className={styles.line}></div>

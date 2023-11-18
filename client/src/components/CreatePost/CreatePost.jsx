@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createPost } from '../../features/post/post.slice';
 import styles from './CreatePost.module.scss';
 import WindowHeader from '../WindowHeader/WindowHeader';
+import Spinner from '../../components/Spinner/Spinner';
 
 function CreatePost() {
   const dispatch = useDispatch();
@@ -59,8 +60,11 @@ function CreatePost() {
   };
 
   if (isPostCreated && isLoading) {
-    // todo: Add a loading spinner
-    return <div className={styles.stateMessage}>Loading...</div>;
+    return (
+      <div className={styles.stateMessage}>
+        <Spinner />{' '}
+      </div>
+    );
   }
 
   if (isPostCreated && isSuccess) {

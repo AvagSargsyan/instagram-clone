@@ -46,6 +46,9 @@
         .loginBtn {
           width: 100%;
           margin-top: 20px;
+          contain: content;
+          min-height: 32px;
+          position: relative;
         }
 
         .or {

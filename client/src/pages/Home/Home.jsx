@@ -5,6 +5,7 @@ import UserHeader from '../../components/UserHeader/UserHeader';
 import { getAllPosts, reset } from '../../features/post/post.slice';
 import Post from '../../components/Post/Post';
 import styles from './Home.module.scss';
+import Spinner from '../../components/Spinner/Spinner';
 
 function Home() {
   const { user } = useSelector((state) => state.auth);
@@ -30,8 +31,7 @@ function Home() {
     <section className={styles.pageWrapper}>
       <UserHeader className={styles.header} />
       {isLoading ? (
-        // todo: Add a loading spinner
-        'Loading...'
+        <Spinner />
       ) : (
         <section className={styles.main}>
           {posts.length > 0 ? (
@@ -46,7 +46,9 @@ function Home() {
               ))}
             </div>
           ) : isError ? (
-            <h3 className={styles.message}>An error accured while getting posts.</h3>
+            <h3 className={styles.message}>
+              An error accured while getting posts.
+            </h3>
           ) : (
             <h3 className={styles.message}>There aren't any posts to show.</h3>
           )}

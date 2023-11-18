@@ -5,6 +5,7 @@ import { register, reset } from '../../features/auth/auth.slice';
 import styles from './Register.module.scss';
 import InstagramLogo from '../../components/InstagramLogo/InstagramLogo';
 import FormControl from '../../components/FormControl/FormControl';
+import Spinner from '../../components/Spinner/Spinner';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -104,8 +105,7 @@ function Register() {
             <button
               type="submit"
               className={`btn-default ${styles.signupBtn}`}>
-              {/* todo: Add a loading spinner */}
-              {isLoading ? 'Loading...' : 'Sign up'}
+              {isLoading ? <Spinner size="small" /> : 'Sign up'}
             </button>
           </form>
         </div>

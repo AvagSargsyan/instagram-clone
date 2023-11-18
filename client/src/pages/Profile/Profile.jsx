@@ -7,6 +7,7 @@ import OwnPost from '../../components/OwnPost/OwnPost';
 import styles from './Profile.module.scss';
 import Overlay from '../../components/Overlay/Overlay';
 import NavigationBtn from '../../components/NavigationBtn/NavigationBtn';
+import Spinner from '../../components/Spinner/Spinner';
 
 function Profile() {
   const { user } = useSelector((state) => state.auth);
@@ -69,8 +70,7 @@ function Profile() {
             </div>
           </main>
           {isLoading ? (
-            // todo: Add a loading spinner
-            'Loading...'
+            <Spinner />
           ) : (
             <section className={styles.posts}>
               <h3 className={styles.postsHeading}>posts</h3>

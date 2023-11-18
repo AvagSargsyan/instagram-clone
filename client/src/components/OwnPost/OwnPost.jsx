@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Overlay from '../Overlay/Overlay';
 import { useDispatch, useSelector } from 'react-redux';
 import { deletePost } from '../../features/post/post.slice';
+import Spinner from '../Spinner/Spinner';
 
 const OwnPost = ({ post, className }) => {
   const { posts, isLoading, isSuccess, isError } = useSelector(
@@ -32,12 +33,17 @@ const OwnPost = ({ post, className }) => {
   };
 
   if (isPostDeleted && isLoading) {
-    // todo: Add a loading spinner
-    return <div className={styles.stateMessage}>Loading...</div>;
+    return (
+      <div className={styles.stateMessage}>
+        <Spinner />
+      </div>
+    );
   }
 
   if (isPostDeleted && isSuccess) {
-    return <div className={styles.stateMessage}>Your post has been deleted.</div>;
+    return (
+      <div className={styles.stateMessage}>Your post has been deleted.</div>
+    );
   }
 
   if (isPostDeleted && isError) {
